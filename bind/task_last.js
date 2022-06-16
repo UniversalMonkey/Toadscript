@@ -11,5 +11,5 @@ function askPassword(ok, fail) {
       alert( this.name + (result ? ' logged in' : ' failed to log in') );
     }
   };
-  debugger
+
   askPassword(user.login.bind(user, true), user.login.bind(user,false));
