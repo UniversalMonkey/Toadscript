@@ -1,0 +1,1 @@
+console.log(eval(prompt("Введите арифметическое выражение","1+1"))) //CSP FireFox?
