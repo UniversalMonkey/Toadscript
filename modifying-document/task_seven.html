@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="calendar"></div>
+
+  <script>
+    const ALL_DAYS_NAME = ["пн","вт","ср","чт","пт","сб","вс",]
+
+    function getAllDaysInMonth(year, month) {
+        return new Date(year, month, 0)
+    }
+
+    function createTable(elem, date) {
+        const newTable = document.createElement("table")
+
+        newTable.append(createNameFirstLineDaysInTable())
+        createNumberDaysInTable(newTable ,date)
+        elem.append(newTable)
+    }
+
+    function createNameFirstLineDaysInTable() {
+        const trInTable = document.createElement("tr")
+
+        for (let index = 0; index < ALL_DAYS_NAME.length; index++) {
+            const thInTable = document.createElement("th")
+            thInTable.textContent = ALL_DAYS_NAME[index]
+            trInTable.append(thInTable)
+        }
+        return trInTable
+    }
+
+    function createNumberDaysInTable(table, date) {
+        const CORRECT_ALL_DAYS_NAME_FOR_OBJECT_DATE = ["вс","пн","вт","ср","чт","пт","сб",]
+
+        const current_dayIndex_InDate = CORRECT_ALL_DAYS_NAME_FOR_OBJECT_DATE[new Date(date.setDate(1)).getDay()]
+
+        let [elementSecondLine, currentDays] = createNumbersSecondLineDaysInTable(ALL_DAYS_NAME.indexOf(current_dayIndex_InDate))
+        
+        table.append(elementSecondLine)
+
+        for (let week = 2; week <= 5; week++) {
+            const element_Line_tr = document.createElement("tr")
+            for (let day = 1; day <= 7 ; day++) {
+                const element_td = document.createElement("td")
+                ++currentDays
+                element_td.textContent = currentDays
+                element_Line_tr.append(element_td)
+                table.append(element_Line_tr)
+            }
+        }
+   }
+
+     function createNumbersSecondLineDaysInTable(daysIndex) {
+        const trInTable = document.createElement("tr")
+        let currentDays = 0
+
+        for (let index = 0; index < 7; index++) {
+            const thInTable = document.createElement("td")
+
+            if(index >= daysIndex){
+                ++currentDays
+                thInTable.textContent = currentDays
+            }
+            trInTable.append(thInTable)
+        }
+        return [trInTable, currentDays]
+     }
+
+    function createCalendar(elem, year, month) {
+        const countDaysInCurrentDate = getAllDaysInMonth(year,month)
+        createTable(elem, countDaysInCurrentDate)
+    }
+
+    createCalendar(calendar, 2012, 9);
+  </script>
+
+</body>
+</html>
