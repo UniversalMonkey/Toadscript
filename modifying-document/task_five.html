@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div id="tree"></div>
+
+  <script>
+    let data = {
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
+      },
+
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
+        },
+        "Цветковые": {
+          "яблоня": {},
+          "магнолия": {}
+        }
+      }
+    };
+
+    function checkCurrentproperty(property) {
+        return Object.keys(property).length
+    }
+
+    function createTree(container, data) {
+        container.append(createDOM(data))
+    }
+
+    function createDOM(params) {
+        if (!checkCurrentproperty(params)) return false;
+
+        const ul_element = document.createElement("ul")
+
+        for (const key in params) {
+            const li_element = document.createElement("li")
+            li_element.textContent = key
+            console.log(key,params[key])
+            const insideUl = createDOM(params[key])
+            
+            if(insideUl) {
+                console.log(key,li_element.textContent, "popal")
+                li_element.append(insideUl)
+            }
+
+            ul_element.append(li_element)
+        }
+        return ul_element
+    }
+    let container = document.getElementById('tree');
+
+    createTree(container, data); // создаёт дерево в контейнере
+  </script>
+
+</body>
+</html>
