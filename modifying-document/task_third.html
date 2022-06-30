@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<body>
+    <table id="table">
+        aaa
+        <tr>
+          <td>Тест</td>
+        </tr>
+      </table>
+      
+      <script>
+        alert(table); // таблица, как и должно быть
+      
+        table.remove();
+        // почему в документе остался текст "ааа"?
+        /*
+        aaa
+        <table>
+            .....
+        </table>
+        */
+      </script>
+</body>
+</html>
