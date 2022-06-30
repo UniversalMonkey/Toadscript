@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<body>
+    <ul>
+
+    </ul>
+
+    <script>
+        const element_ul = document.querySelector("body ul")
+        while (true) {
+            const node_text = prompt("Содержимое пункта","")
+            if(node_text){
+                const new_element_li = document.createElement("li")
+                new_element_li.textContent = node_text
+                element_ul.append(new_element_li)
+                continue
+            }
+            break
+        }
+    </script>
+</body>
+</html>
