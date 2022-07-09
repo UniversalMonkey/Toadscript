@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #field {
+      width: 200px;
+      height: 150px;
+      border: 10px solid black;
+      background-color: #00FF00;
+      overflow: hidden;
+      position: relative;
+    }
+    #ball {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      transition: all 1s;
+    }
+  </style>
+</head>
+
+<body style="height:2000px">
+
+  Нажмите на поле для перемещения мяча.
+  <br> Мяч не должен выходить за границы поля.
+
+
+  <div id="field">
+    <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    field.addEventListener("click", event =>{
+        const ball = document.querySelector("#ball")
+
+        const max_height_ball =  field.clientHeight - ball.offsetHeight
+        const max_left_ball =  field.clientWidth - ball.offsetWidth
+
+        let coord_ball_left =  event.clientX - field.getBoundingClientRect().left - field.clientLeft - ball.offsetWidth/2
+        let coord_ball_top = event.clientY - field.getBoundingClientRect().top - field.clientTop - ball.offsetHeight/2
+        
+        if(coord_ball_left < 0 ){
+            coord_ball_left = 0
+        }
+        if(coord_ball_top < 0 ){
+            coord_ball_top = 0 
+        }
+        if(coord_ball_top > max_height_ball){
+            coord_ball_top = max_height_ball
+        }
+        if(coord_ball_left > max_left_ball){
+            coord_ball_left = max_left_ball
+        }
+
+        ball.style.left = coord_ball_left + "px"
+        ball.style.top = coord_ball_top + "px"
+    })
+  </script>
+</body>
+</html>
