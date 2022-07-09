@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="index.css">
+  <script>
+    document.onclick = function(e) { // показывает координаты точки клика
+      coords.innerHTML = e.clientX + ':' + e.clientY;
+    };
+  </script>
+</head>
+
+<body>
+
+  Кликните в любом месте для получения координат в контексте окна.
+  <br> Это для тестирования, чтобы проверить результат, который вы получили с помощью JavaScript.
+  <br>
+  <div id="coords">(координаты покажутся здесь)</div>
+
+
+  <div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+
+  <div class="triangle-right" style="left:-20px;top:-176px">1</div>
+  <div class="triangle-right" style="left:-10px;top:-178px">3</div>
+  <div class="triangle-right" style="left:190px;top:-40px">4</div>
+  <div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+
+  <script>
+    const elemem_div =  document.createElement("div")
+    const field_coor = field.getBoundingClientRect()
+    
+    elemem_div.innerHTML =  `верхний левый, внешний угол : ${field_coor.left}:${field_coor.top.toFixed(0)}` + "<br>"
+    elemem_div.innerHTML += `нижний правый, внешний угол : ${field_coor.right}:${field_coor.bottom.toFixed(0)}` + "<br>"
+    
+    elemem_div.innerHTML += `верхний левый, внутренний угол : ${field_coor.left + field.clientLeft}:${(field_coor.top + field.clientLeft).toFixed(0)}` + "<br>"
+    elemem_div.innerHTML += `нижний правый, внутренний угол : ${(field_coor.right - field.clientLeft).toFixed(0)} : ${(field_coor.bottom - field.clientTop).toFixed(0)} `
+    
+    document.body.append(elemem_div)
+  </script>
+
+</body>
+</html>
