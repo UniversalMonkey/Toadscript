@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    table {
+       border-collapse: collapse;
+     }
+     th, td {
+       border: 1px solid black;
+       padding: 4px;
+     }
+     th {
+       cursor: pointer;
+     }
+     th:hover {
+       background: yellow;
+     }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>Вася</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Петя</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Женя</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Маша</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Илья</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    grid.addEventListener("click", event => {
+        if (event.target.tagName !== "TH") return
+
+        const INTEGER = 0
+        const STRING = 1
+
+        const tbody = document.body.querySelectorAll("tbody")
+
+        const tbody_table_array = Array.from(tbody[0].rows)
+
+        if (event.target.dataset.type === "string") {
+            tbody_table_array.sort( (first_name, second_name) => first_name.cells[STRING].textContent
+                                                                .localeCompare(second_name.cells[STRING].textContent))
+        }
+        else {
+            tbody_table_array.sort( (first_name, second_age) =>  
+            +first_name.cells[INTEGER].textContent > +second_age.cells[INTEGER].textContent);
+        }
+        tbody[0].append(...tbody_table_array)
+    })
+  </script>
+
+</body>
+</html>
